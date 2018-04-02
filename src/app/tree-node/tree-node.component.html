@@ -1,0 +1,18 @@
+<div class="tree-node__container">
+	<div *ngIf="isShow">
+		<div *ngFor="let childNode of childNodes; let i = index">
+			<div (click)="trigger($event, i)">
+				<span 
+					[class]="'icon-ele ' + (childNode.children.length === 0 ? 'docu-ele': isChildNodeShow[i] ? 'file-open' : 'file-close')">
+				</span>
+				<span>{{childNode.title}}</span>
+			</div>
+			<app-tree-node
+				*ngIf="childNode.children.length != 0"
+				[childNodes]="childNode.children"
+				[isShow]="isChildNodeShow[i]"
+				(onClicked)="passClickEvent($event)">
+			</app-tree-node>
+		</div>
+	</div>
+</div>
